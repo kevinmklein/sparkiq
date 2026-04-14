@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get a Quote — SparkIQ</title>
+  <meta name="description" content="Request a free quote from SparkIQ. Smart home integration and electrical services in King and Snohomish Counties, WA." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="nav scrolled">
+  <a href="index.html" class="nav-logo">
+    <span class="bolt">⚡</span>SparkIQ
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta active">Get a Quote</a>
+  </div>
+  <div class="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── Page Hero ─── -->
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="hero-eyebrow" style="justify-content: center; margin-bottom: 1rem;">Free Consultation</div>
+    <h1>Let's build your<br><em>smart home.</em></h1>
+    <p style="margin-top: 1rem;">Tell us about your project. We'll respond within one business day with a clear, no-obligation scope and quote.</p>
+  </div>
+</section>
+
+<!-- ─── Contact Form + Sidebar ─── -->
+<section class="section section-light">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- Form -->
+      <div class="contact-form-wrap reveal">
+        <div style="margin-bottom: 2rem;">
+          <div class="section-label" style="margin-bottom: 0.5rem;">Get a Quote</div>
+          <h2 style="font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--text-dark);">Tell us about your project</h2>
+          <p style="color: var(--gray-dark); font-size: 0.95rem; margin-top: 0.5rem;">All fields optional except name and email. The more detail you share, the better we can scope your project.</p>
+        </div>
+        <form class="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name *</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(206) 555-0100" />
+            </div>
+            <div class="form-group">
+              <label for="city">Your City</label>
+              <input type="text" id="city" name="city" placeholder="Kirkland, Edmonds, etc." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Service You're Interested In</label>
+            <select id="service" name="service">
+              <option value="" disabled selected>Select a package…</option>
+              <option value="wifi">Whole-Home Wi-Fi Upgrade</option>
+              <option value="lighting">Smart Lighting Starter ★ Recommended</option>
+              <option value="ev">EV Charger + Panel Ready</option>
+              <option value="wholehome">Whole-Home Smart Upgrade</option>
+              <option value="managed">Managed Smart Home</option>
+              <option value="unsure">Not sure — I need a recommendation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell Us About Your Project</label>
+            <textarea id="message" name="message" placeholder="Describe what you're hoping to accomplish — current pain points, what rooms or systems you want upgraded, timeline, etc. The more detail the better."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Send My Quote Request →</button>
+          <p style="font-size: 0.78rem; color: var(--gray-mid); margin-top: 0.75rem; text-align: center;">We respond within 1 business day. No spam, ever.</p>
+        </form>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="contact-sidebar reveal reveal-delay-2">
+
+        <div class="sidebar-card">
+          <h4>What to expect</h4>
+          <div class="expect-list">
+            <div class="expect-item">
+              <div class="expect-num">1</div>
+              <span>We review your request and reach out within <strong style="color: var(--white);">1 business day</strong></span>
+            </div>
+            <div class="expect-item">
+              <div class="expect-num">2</div>
+              <span>A quick call or visit to scope your project — <strong style="color: var(--white);">free consultation</strong></span>
+            </div>
+            <div class="expect-item">
+              <div class="expect-num">3</div>
+              <span>Clear, itemized quote with <strong style="color: var(--white);">no hidden fees</strong> or surprise add-ons</span>
+            </div>
+            <div class="expect-item">
+              <div class="expect-num">4</div>
+              <span>You decide — <strong style="color: var(--white);">zero obligation</strong> to proceed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Service Area</h4>
+          <p style="color: rgba(255,255,255,0.55); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem;">We currently serve King and Snohomish Counties, WA. Not sure if you're in range? Ask — we'll let you know.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">
+              <div style="font-weight: 600; color: var(--blue); margin-bottom: 0.3rem;">King County</div>
+              Bellevue · Kirkland · Redmond · Mercer Island · Renton · Issaquah · Sammamish
+            </div>
+            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">
+              <div style="font-weight: 600; color: var(--blue); margin-bottom: 0.3rem;">Snohomish County</div>
+              Bothell · Edmonds · Lynnwood · Mukilteo · Marysville · Kenmore · Mill Creek
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card" style="background: var(--blue); border: none;">
+          <h4 style="color: var(--navy);">Not sure which package?</h4>
+          <p style="color: rgba(6,12,26,0.65); font-size: 0.875rem; line-height: 1.6;">Select "Not sure — I need a recommendation" in the form and describe your home and goals. We'll point you in the right direction.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="bolt">⚡</span>SparkIQ</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Get a Quote</a>
+    </div>
+    <div class="footer-copy">King &amp; Snohomish Counties, WA · © 2026 SparkIQ</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

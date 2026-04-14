@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SparkIQ — Smart Home Integration + Electrical | King & Snohomish Counties</title>
+  <meta name="description" content="SparkIQ brings premium smart home integration and full electrical capability to King and Snohomish Counties, WA. Packaged offers, transparent pricing, one company." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Home-specific extras */
+    .hero-home { min-height: 100vh; padding: 120px 2rem 100px; }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+    .hero-stat-item { text-align: left; }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--blue);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      margin-top: 0.25rem;
+      letter-spacing: 0.03em;
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-arrow { font-size: 1rem; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    .flow-section { padding: 80px 2rem; }
+    .flow-section .container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .flow-intro h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .flow-intro p { font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    @media (max-width: 900px) {
+      .flow-section .container { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="nav scrolled">
+  <a href="index.html" class="nav-logo">
+    <span class="bolt">⚡</span>SparkIQ
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Get a Quote</a>
+  </div>
+  <div class="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero hero-home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">King &amp; Snohomish Counties, WA</div>
+    <h1>Your home.<br><em>Intelligently</em><br>upgraded.</h1>
+    <p class="hero-sub">SparkIQ is the only local company that handles smart home design and full electrical work under one roof — packaged, priced, and done right the first time.</p>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn btn-primary">Get a Quote →</a>
+      <a href="services.html" class="btn btn-outline">See Our Packages</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Service Packages</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">2</div>
+        <div class="hero-stat-label">Counties Served</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">Company, No Handoffs</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+</section>
+
+<!-- ─── Why SparkIQ ─── -->
+<section class="section section-white">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Why SparkIQ</div>
+      <h2 class="section-title reveal">Smart home expertise.<br>Real electrical muscle.</h2>
+      <p class="section-sub reveal">Most integrators stop at low voltage. We don't. One company, full capability, zero contractor juggling.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">🧠</div>
+        <h3>Deep Smart Home Expertise</h3>
+        <p>From Wi-Fi mesh architecture to whole-home automation, we design systems that actually work — and train you to use them with confidence.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">⚡</div>
+        <h3>Full Electrical Capability</h3>
+        <p>Low voltage and line voltage, all in one project. Panel upgrades, EV circuits, dedicated runs — no second contractor, no scheduling gaps.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">📋</div>
+        <h3>Transparent Package Pricing</h3>
+        <p>Five defined packages. No "contact us for a quote" runaround. You know what you're getting and roughly what it costs before anyone comes to your door.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Package Teasers ─── -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Our Packages</div>
+      <h2 class="section-title reveal">Five ways to upgrade your home.</h2>
+      <p class="section-sub reveal">Entry-level to flagship. Pick your starting point.</p>
+    </div>
+    <div class="packages-teaser-grid">
+      <div class="pkg-teaser-card reveal reveal-delay-1">
+        <div class="pkg-icon">📶</div>
+        <div class="pkg-name">Whole-Home<br>Wi-Fi Upgrade</div>
+        <div class="pkg-desc">Professional mesh network design and installation. Coverage where you actually need it.</div>
+        <a href="services.html" class="pkg-link">See details →</a>
+      </div>
+      <div class="pkg-teaser-card featured reveal reveal-delay-2">
+        <div class="pkg-badge">★ Recommended</div>
+        <div class="pkg-icon">💡</div>
+        <div class="pkg-name">Smart Lighting<br>Starter</div>
+        <div class="pkg-desc">Scenes, schedules, and dimming done right. The highest-value entry point for most homeowners.</div>
+        <a href="services.html" class="pkg-link">See details →</a>
+      </div>
+      <div class="pkg-teaser-card reveal reveal-delay-3">
+        <div class="pkg-icon">🔌</div>
+        <div class="pkg-name">EV Charger +<br>Panel Ready</div>
+        <div class="pkg-desc">Home charging done properly. Panel assessment, dedicated circuit, permit coordination.</div>
+        <a href="services.html" class="pkg-link">See details →</a>
+      </div>
+      <div class="pkg-teaser-card reveal reveal-delay-4">
+        <div class="pkg-icon">🏠</div>
+        <div class="pkg-name">Whole-Home<br>Smart Upgrade</div>
+        <div class="pkg-desc">The flagship. Lighting, locks, cameras, AV, thermostat — unified in a single app.</div>
+        <a href="services.html" class="pkg-link">See details →</a>
+      </div>
+      <div class="pkg-teaser-card reveal reveal-delay-5">
+        <div class="pkg-icon">🛡️</div>
+        <div class="pkg-name">Managed<br>Smart Home</div>
+        <div class="pkg-desc">Ongoing monitoring, updates, and priority scheduling. Your system, always current.</div>
+        <a href="services.html" class="pkg-link">See details →</a>
+      </div>
+    </div>
+    <div style="margin-top: 2.5rem; text-align: center;" class="reveal">
+      <a href="services.html" class="btn btn-outline">View All Packages &amp; Details →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── How It Works ─── -->
+<section class="flow-section section-mid">
+  <div class="container">
+    <div class="flow-intro reveal">
+      <div class="section-label" style="margin-bottom: 0.75rem;">How It Works</div>
+      <h2>From discovery<br>to managed home.</h2>
+      <p style="margin-top: 0.75rem;">A simple, repeatable path from first search to lifetime customer.</p>
+    </div>
+    <div class="flow-steps reveal">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-label">Find us<br>via search</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-label">Choose a<br>package</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-label">Owner-led<br>consultation</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-label">Pro crew<br>installs</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-label">Managed<br>service upsell</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Service Area Strip ─── -->
+<div class="proof-strip">
+  <p>Serving homeowners across</p>
+  <div class="cities">
+    <span class="city">Bellevue</span><span class="city-dot">●</span>
+    <span class="city">Kirkland</span><span class="city-dot">●</span>
+    <span class="city">Redmond</span><span class="city-dot">●</span>
+    <span class="city">Mercer Island</span><span class="city-dot">●</span>
+    <span class="city">Renton</span><span class="city-dot">●</span>
+    <span class="city">Bothell</span><span class="city-dot">●</span>
+    <span class="city">Edmonds</span><span class="city-dot">●</span>
+    <span class="city">Lynnwood</span><span class="city-dot">●</span>
+    <span class="city">Mukilteo</span><span class="city-dot">●</span>
+    <span class="city">Marysville</span>
+  </div>
+</div>
+
+<!-- ─── CTA Band ─── -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Ready to upgrade your home?</h2>
+    <p>No obligation. Free consultation. We'll scope your project and send a clear quote.</p>
+    <a href="contact.html" class="btn btn-dark">Get a Quote →</a>
+  </div>
+</div>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="bolt">⚡</span>SparkIQ</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Get a Quote</a>
+    </div>
+    <div class="footer-copy">King &amp; Snohomish Counties, WA · © 2026 SparkIQ</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
