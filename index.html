@@ -64,14 +64,15 @@
     .flow-intro h2 {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: 1.6rem;
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
       color: var(--white);
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       margin-bottom: 0.75rem;
-      line-height: 1.2;
+      line-height: 1.25;
     }
     .flow-intro p { font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
     @media (max-width: 900px) {
+      .flow-section { padding: 60px 1.5rem; }
       .flow-section .container { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
