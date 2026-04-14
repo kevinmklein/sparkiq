@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cash flow model — Smart home + electrical business</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg2: #f5f5f4; --bg3: #eeede8;
+    --text: #1c1c1a; --text2: #5f5e5a; --text3: #888780;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.2);
+    --blue: #185fa5; --blue-bg: #e6f1fb; --blue-text: #0c447c;
+    --green: #3b6d11; --green-bg: #eaf3de; --green-text: #27500a;
+    --red: #a32d2d; --red-bg: #fcebeb; --red-text: #791f1f;
+    --amber: #854f0b; --amber-bg: #faeeda; --amber-text: #633806;
+    --teal: #0f6e56;
+    --radius: 8px; --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #2c2c2a; --bg3: #3a3a38;
+      --text: #e8e6df; --text2: #b4b2a9; --text3: #888780;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
+      --blue: #85b7eb; --blue-bg: #042c53; --blue-text: #b5d4f4;
+      --green: #97c459; --green-bg: #173404; --green-text: #c0dd97;
+      --red: #f09595; --red-bg: #501313; --red-text: #f7c1c1;
+      --amber: #ef9f27; --amber-bg: #412402; --amber-text: #fac775;
+    }
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); padding: 1.5rem; font-size: 14px; line-height: 1.6; }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: var(--text2); font-size: 13px; margin-bottom: 1.5rem; }
+  .section-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); margin: 1.25rem 0 8px; }
+  .controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 1.5rem; }
+  .ctrl { display: flex; flex-direction: column; gap: 5px; }
+  .ctrl-label { font-size: 12px; color: var(--text2); display: flex; justify-content: space-between; }
+  .ctrl-val { font-weight: 600; color: var(--text); }
+  input[type=range] { width: 100%; accent-color: var(--blue); }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; }
+  .metric-label { font-size: 11px; color: var(--text3); margin-bottom: 3px; }
+  .metric-val { font-size: 20px; font-weight: 600; color: var(--text); }
+  .metric-val.pos { color: var(--green); }
+  .metric-val.neg { color: var(--red); }
+  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+  .chart-wrap { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1.5rem; height: 220px; position: relative; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: var(--bg2); color: var(--text3); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--border2); }
+  th:first-child { text-align: left; }
+  td { padding: 6px 10px; text-align: right; border-bottom: 0.5px solid var(--border); font-variant-numeric: tabular-nums; color: var(--text2); }
+  td:first-child { text-align: left; color: var(--text); }
+  tr.be-row td { background: var(--green-bg); color: var(--green-text); font-weight: 600; }
+  td.neg { color: var(--red-text); background: var(--red-bg); }
+  td.pos-cum { color: var(--green-text); background: var(--green-bg); }
+  .note { font-size: 11px; color: var(--text3); line-height: 1.6; margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+  .saved-banner { display: none; font-size: 11px; color: var(--green); margin-top: 6px; }
+  .save-btn { margin-top: 10px; padding: 6px 14px; font-size: 12px; background: var(--bg2); border: 0.5px solid var(--border2); border-radius: var(--radius); cursor: pointer; color: var(--text); }
+  .save-btn:hover { background: var(--bg3); }
+  @media (max-width: 600px) { .controls, .metrics { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<h1>Cash flow model</h1>
+<p class="subtitle">Smart home integration + residential electrical · King &amp; Snohomish Counties, WA</p>
+
+<div class="section-label">Model inputs</div>
+<div class="controls">
+  <div class="ctrl">
+    <label class="ctrl-label">Monthly jobs (steady state) <span class="ctrl-val" id="jobs-val">6</span></label>
+    <input type="range" min="2" max="20" step="1" value="6" id="jobs">
+  </div>
+  <div class="ctrl">
+    <label class="ctrl-label">Avg. revenue per job <span class="ctrl-val" id="rev-val">$3,500</span></label>
+    <input type="range" min="500" max="15000" step="250" value="3500" id="rev">
+  </div>
+  <div class="ctrl">
+    <label class="ctrl-label">Gross margin (after sub labor + materials) <span class="ctrl-val" id="margin-val">42%</span></label>
+    <input type="range" min="20" max="65" step="1" value="42" id="margin">
+  </div>
+  <div class="ctrl">
+    <label class="ctrl-label">Monthly overhead (fixed) <span class="ctrl-val" id="overhead-val">$4,500</span></label>
+    <input type="range" min="1000" max="15000" step="250" value="4500" id="overhead">
+  </div>
+</div>
+
+<div class="section-label">Steady-state metrics</div>
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Monthly revenue</div><div class="metric-val" id="m-rev">—</div></div>
+  <div class="metric"><div class="metric-label">Gross profit</div><div class="metric-val" id="m-gp">—</div></div>
+  <div class="metric"><div class="metric-label">Net income / mo</div><div class="metric-val" id="m-net">—</div></div>
+  <div class="metric"><div class="metric-label">Breakeven jobs/mo</div><div class="metric-val" id="m-be">—</div></div>
+</div>
+
+<div class="section-label">12-month revenue &amp; net income ramp</div>
+<div class="chart-wrap"><canvas id="chart"></canvas></div>
+
+<div class="section-label">Monthly detail — first 12 months <span style="font-style:italic;text-transform:none;font-weight:400;letter-spacing:0"> (highlighted row = cumulative breakeven)</span></div>
+<table>
+  <thead>
+    <tr>
+      <th>Month</th><th>Jobs</th><th>Revenue</th><th>Gross profit</th><th>Overhead</th><th>Net income</th><th>Cumulative</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<button class="save-btn" onclick="saveState()">Save current inputs</button>
+<div class="saved-banner" id="saved-banner">Inputs saved to this browser.</div>
+
+<div class="note">
+  <strong>Assumptions:</strong> Ramp curve starts at ~25% of steady-state in month 1, reaches 100% by month 8. Overhead includes owner draw placeholder, insurance, software, marketing spend, and vehicle cost. Sub labor and materials are variable (reflected in gross margin). No W-2 employees modeled. Managed service recurring revenue not included — adds meaningful upside once install base grows. All figures are illustrative placeholders pending market validation.
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const ramp = [0.25, 0.38, 0.50, 0.62, 0.72, 0.80, 0.87, 1.0, 1.0, 1.0, 1.0, 1.0];
+let chart;
+
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem('cf_inputs') || '{}');
+    if (s.jobs) { $('jobs').value = s.jobs; $('rev').value = s.rev; $('margin').value = s.margin; $('overhead').value = s.overhead; }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('cf_inputs', JSON.stringify({
+      jobs: $('jobs').value, rev: $('rev').value,
+      margin: $('margin').value, overhead: $('overhead').value
+    }));
+    $('saved-banner').style.display = 'block';
+    setTimeout(() => { $('saved-banner').style.display = 'none'; }, 2500);
+  } catch(e) {}
+}
+
+function update() {
+  const jobs = +$('jobs').value, rev = +$('rev').value;
+  const margin = +$('margin').value / 100, overhead = +$('overhead').value;
+
+  $('jobs-val').textContent = jobs;
+  $('rev-val').textContent = fmt(rev);
+  $('margin-val').textContent = Math.round(margin*100) + '%';
+  $('overhead-val').textContent = fmt(overhead);
+
+  const ssGP = jobs * rev * margin;
+  const ssNet = ssGP - overhead;
+  const beJobs = Math.ceil(overhead / (rev * margin));
+
+  $('m-rev').textContent = fmt(jobs * rev);
+  $('m-gp').textContent = fmt(ssGP);
+  const netEl = $('m-net');
+  netEl.textContent = fmt(ssNet);
+  netEl.className = 'metric-val ' + (ssNet >= 0 ? 'pos' : 'neg');
+  $('m-be').textContent = beJobs;
+
+  let cum = 0;
+  let beFound = false;
+  const months = ramp.map((r, i) => {
+    const mJobs = Math.round(jobs * r);
+    const mRev = mJobs * rev;
+    const mGP = Math.round(mRev * margin);
+    const mNet = mGP - overhead;
+    const prevCum = cum;
+    cum += mNet;
+    const isBreak = !beFound && cum >= 0 && prevCum < 0;
+    if (isBreak) beFound = true;
+    return { month: i+1, jobs: mJobs, rev: mRev, gp: mGP, net: mNet, cum, isBreak };
+  });
+
+  const tbody = $('tbody');
+  tbody.innerHTML = '';
+  months.forEach(m => {
+    const tr = document.createElement('tr');
+    if (m.isBreak) tr.className = 'be-row';
+    const negNet = m.net < 0 ? ' neg' : '';
+    const cumClass = m.cum >= 0 ? ' pos-cum' : ' neg';
+    tr.innerHTML = `
+      <td>Mo ${m.month}${m.isBreak ? ' ✓' : ''}</td>
+      <td>${m.jobs}</td><td>${fmt(m.rev)}</td><td>${fmt(m.gp)}</td>
+      <td>${fmt(overhead)}</td>
+      <td class="${negNet.trim()}">${fmt(m.net)}</td>
+      <td class="${cumClass.trim()}">${fmt(m.cum)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const gc = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.05)';
+  const tc = dark ? '#888780' : '#888780';
+  const labels = months.map(m => 'Mo ' + m.month);
+  const revData = months.map(m => m.rev);
+  const netData = months.map(m => m.net);
+
+  if (chart) {
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = revData;
+    chart.data.datasets[1].data = netData;
+    chart.data.datasets[1].backgroundColor = netData.map(v => v >= 0 ? (dark ? '#27500a' : '#C0DD97') : (dark ? '#791f1f' : '#F7C1C1'));
+    chart.update('none');
+  } else {
+    const ctx = $('chart').getContext('2d');
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Revenue', data: revData, backgroundColor: dark ? '#0c447c' : '#B5D4F4', borderRadius: 3, order: 2 },
+          { label: 'Net income', data: netData, backgroundColor: netData.map(v => v >= 0 ? (dark ? '#27500a' : '#C0DD97') : (dark ? '#791f1f' : '#F7C1C1')), borderRadius: 3, order: 1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: { size: 11, family: 'inherit' }, color: tc, boxWidth: 12, boxHeight: 12 } } },
+        scales: {
+          x: { grid: { color: gc }, ticks: { color: tc, font: { size: 10 } } },
+          y: { grid: { color: gc }, ticks: { color: tc, font: { size: 10 }, callback: v => '$' + Math.round(v/1000) + 'k' } }
+        }
+      }
+    });
+  }
+}
+
+['jobs','rev','margin','overhead'].forEach(id => $( id).addEventListener('input', update));
+load();
+update();
+</script>
+</body>
+</html>
